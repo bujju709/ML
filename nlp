@@ -1,0 +1,12 @@
+import re 
+import string 
+text = """ Natural Language Processing (NLP) is a branch of artificial intelligence  
+that helps computers understand and use human language. """ 
+sentences = text.split('.') 
+sentences = [sentence.strip() for sentence in sentences if sentence.strip()] 
+print("Sentences: \n", sentences) 
+words = re.findall(r'\b\w+\b', text) 
+print("Words: \n", words) 
+stop_words = {"is", "a", "of", "and", "the", "that", "helps", "use"} 
+filtered_words = [word for word in words if word.lower() not in stop_words] 
+print("Filtered Words (No Stopwords): \n", filtered_words) 
