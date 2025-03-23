@@ -1,0 +1,26 @@
+import numpy as np 
+import matplotlib.pyplot as plt 
+from sklearn.model_selection import train_test_split 
+from sklearn.tree import DecisionTreeClassifier 
+from sklearn import metrics 
+from sklearn.tree import plot_tree 
+from sklearn.datasets import make_classification  
+X, y = make_classification(n_samples=100, n_features=2, n_informative=2,  
+n_redundant=0, n_repeated=0, n_classes=2, random_state=42) 
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42) 
+dt_classifier = DecisionTreeClassifier(random_state=42) 
+dt_classifier.fit(X_train, y_train) 
+y_pred = dt_classifier.predict(X_test) 
+accuracy = metrics.accuracy_score(y_test, y_pred) 
+print(f'Accuracy: {accuracy * 100:.2f}%') 
+plt.figure(figsize=(12, 10)) 
+plot_tree(dt_classifier, 
+          filled=True, 
+          feature_names=["Feature 1", "Feature 2"],  
+          class_names=["Class 0", "Class 1"], 
+          fontsize=10, 
+          impurity=False, 
+          proportion=False, 
+          rounded=True) 
+plt.title("Decision Tree for Simple Dataset", fontsize=16) 
+plt.show()
