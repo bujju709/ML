@@ -1,0 +1,30 @@
+import numpy as np 
+import matplotlib.pyplot as plt 
+X = np.array([1, 2, 3, 4, 5]) 
+y = 2 * X + 1 
+m = 0 
+b = 0 
+learning_rate = 0.001 
+iterations = 1000 
+def gradient_descent(X, y, m, b, learning_rate, iterations): 
+    n = len(X) 
+    for i in range(iterations): 
+        y_pred = m * X + b 
+        error = y_pred - y 
+        m_gradient = (2/n) * np.sum(error * X)  
+        b_gradient = (2/n) * np.sum(error)  
+        m -= learning_rate * m_gradient 
+        b -= learning_rate * b_gradient 
+        if i % 100 == 0: 
+            cost = np.mean(error ** 2)  
+            print(f"Iteration {i}, Cost: {cost}") 
+    return m, b 
+m, b = gradient_descent(X, y, m, b, learning_rate, iterations) 
+print(f"Final values after Gradient Descent: m = {m}, b = {b}") 
+plt.scatter(X, y, color='red', label='Data Points')  
+plt.plot(X, m * X + b, color='blue', label='Fitted Line')  
+plt.xlabel('X')  
+plt.ylabel('Y')  
+plt.title('Linear Regression using Gradient Descent') 
+plt.legend() 
+plt.show() 
