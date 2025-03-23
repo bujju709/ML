@@ -1,0 +1,26 @@
+import numpy as np 
+import matplotlib.pyplot as plt 
+from sklearn.cluster import KMeans 
+import os 
+os.environ["OMP_NUM_THREADS"] = "1" 
+
+X = np.array([[1, 2], [2, 3], [3, 3], [8, 8], [9, 9], [10, 9], [5, 8], [7, 8]]) 
+plt.scatter(X[:, 0], X[:, 1], color='blue', marker='o') 
+ 
+plt.title("Original Data") 
+plt.xlabel("Feature 1") 
+plt.ylabel("Feature 2") 
+plt.show() 
+kmeans = KMeans(n_clusters=3, n_init=10) 
+ 
+kmeans.fit(X) 
+centroids = kmeans.cluster_centers_ 
+labels = kmeans.labels_ 
+plt.scatter(X[:, 0], X[:, 1], c=labels, cmap='viridis', marker='o') 
+
+plt.scatter(centroids[:, 0], centroids[:, 1], s=200, c='red', marker='X') 
+
+plt.title("K-Means Clustering with 3 Clusters") 
+plt.xlabel("Feature 1")
+plt.ylabel("Feature 2") 
+plt.show() 
